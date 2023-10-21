@@ -1,0 +1,21 @@
+One to One Unidirectional mapping
+
+classes -> Person and Passport
+Relation -> One person can have only one passport.
+
+main class -> Person
+dependent class -> passport
+
+since Passport is associated with Person we are mapping @oneToOne on Passport attribute
+inside Person class.
+
+Table in database
+
+Person
+- id
+- name
+- passport_id
+
+Passport
+- id
+- passport_number;
