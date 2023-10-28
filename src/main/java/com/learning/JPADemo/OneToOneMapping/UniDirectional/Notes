@@ -19,3 +19,9 @@ Person
 Passport
 - id
 - passport_number;
+
+When using Generation Type -> AUTO
+in database a new table get created for each entity whichever has this generation type.
+
+for example -> for person table a new table gets created
+as person_seq for maintaining the sequence for the Id.

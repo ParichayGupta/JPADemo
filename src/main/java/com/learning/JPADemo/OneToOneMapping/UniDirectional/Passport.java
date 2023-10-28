@@ -12,7 +12,7 @@ import lombok.Setter;
 @Entity
 public class Passport {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long Id;
 
     private String passportNumber;

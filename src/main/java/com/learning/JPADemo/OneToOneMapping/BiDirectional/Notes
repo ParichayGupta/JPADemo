@@ -1,0 +1,36 @@
+One to One Bidirectional mapping
+
+classes -> User and Address
+Relation -> One user can have only one address and one address belongs to one user.
+(Just assuming a scenario for this tutorial)
+
+main class -> User and address
+dependent class -> User and address
+
+- On the owning side of the relationship
+(the entity that has the foreign key column),
+annotate the reference field with @OneToOne and @JoinColumn to specify the name of
+the foreign key column and the referenced column in the other table.
+We can also use cascade and fetch attributes to define the cascade and
+fetch strategies for the relationship.
+
+
+- On the non-owning side of the relationship
+(the entity that does not have the foreign key column),
+annotate the reference field with @OneToOne and mappedBy to indicate the name of the
+field on the owning side that maps to this entity.
+
+Table in database
+
+Address
+- id
+- pinCode
+- addressLine1
+- addressLine2
+- city
+
+
+User
+- id
+- addressId
+- name
