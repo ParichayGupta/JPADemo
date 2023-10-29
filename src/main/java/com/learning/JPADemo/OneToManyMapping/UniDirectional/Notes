@@ -1,0 +1,83 @@
+One to many unidirectional mapping
+
+
+One to many unidirectional mapping -> a relationship between two entities where
+one entity (the parent) has a reference to a collection of related entities (the children),
+but the children do not have a reference back to the parent.
+This means that the relationship can only be navigated from the parent to the children,
+not the other way around.
+
+For example, suppose we have a Book entity and an Author entity,
+and we want to model a one to many unidirectional relationship between them,
+such that one author can write many books, but one book can only have one author.
+We can use the @OneToMany annotation on the books field in the Author entity to indicate
+this relationship:
+
+@Entity
+public class Author {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @OneToMany
+    private List<Book> books = new ArrayList<>();
+}
+
+when not using @JoinColumn tables in database
+
+- Book
+    - id
+    - name
+
+- Author
+    - id
+    - name
+
+- Author_books
+    - book_id
+    - author_id
+
+
+The @OneToMany annotation tells JPA that the Author entity is the parent and the Book entity
+is the child in this relationship. JPA will automatically create a join table in the database
+to store the association between the two entities. The join table will have two columns: author_id
+and book_id, which are foreign keys referencing the primary keys of the Author and Book
+tables respectively.
+
+
+Alternatively, we can use the @JoinColumn annotation on the books field to specify the name of the
+foreign key column in the Book table that references the Author table.
+This way, we don’t need a join table, and we can have a direct foreign key relationship between
+the two tables:
+
+@Entity
+public class Author {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @OneToMany
+    @JoinColumn(name = "author_id")
+    private List<Book> books = new ArrayList<>();
+
+}
+
+The @JoinColumn annotation tells JPA that the author_id column in the Book table is the foreign key
+that references the id column in the Author table. This simplifies the database schema and
+improves performance.
+
+
+When using @JoinColumn tables in database
+
+- Book
+    - id
+    - author_id
+    - name
+
+- Author
+    - id
+    - name
