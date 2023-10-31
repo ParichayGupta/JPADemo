@@ -1,0 +1,58 @@
+One to many bidirectional mapping
+
+One to many bidirectional mapping  is a way of defining a relationship between two entities
+where both entities have a reference to each other, and the relationship can be navigated from either
+side. For example, suppose we have an Instructor entity and a Course entity, and
+we want to model a one to many bidirectional relationship between them,
+such that one instructor can teach many courses, and one course can only be taught by one instructor.
+
+We can use the @OneToMany annotation on the courses field in the Instructor entity and
+the @ManyToOne annotation on the instructor field in the Course entity to indicate this relationship:
+
+@Entity
+public class Instructor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @OneToMany(mappedBy = "instructor")
+    private List<Course> courses = new ArrayList<>();
+
+}
+
+@Entity
+public class Course {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String title;
+
+    @ManyToOne
+    @JoinColumn(name = "instructor_id")
+    private Instructor instructor;
+
+}
+The @OneToMany annotation tells JPA that the Instructor entity is the parent and
+the Course entity is the child in this relationship.
+The mappedBy element specifies the name of the field in the child entity that owns the relationship.
+In this case, it is the instructor field in the Course entity.
+
+The @ManyToOne annotation tells JPA that the Course entity is the child and
+the Instructor entity is the parent in this relationship.
+The @JoinColumn annotation specifies the name of the foreign key column in the child table
+that references the parent table. In this case, it is the instructor_id column in the Course table.
+
+
+- Tables in database
+
+- Instructor
+    - id
+    - name
+
+- Course
+    - id
+    - title
+    - instructor_id
