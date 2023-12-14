@@ -13,5 +13,7 @@ public class Course {
     @ManyToOne
     @JoinColumn(name = "instructor_id")
     private Instructor instructor;
-
+    
+    
+    String Authour;
 }
