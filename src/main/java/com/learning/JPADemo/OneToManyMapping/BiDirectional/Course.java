@@ -15,5 +15,5 @@ public class Course {
     private Instructor instructor;
     
     
-    String Authour;
+    String pusblisher;
 }
